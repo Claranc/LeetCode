@@ -6,6 +6,7 @@ public:
             return s.size();
         }
         int max = 0; //记录最大匹配长度
+        // i 为起点，j为当前检测到的位置
         for (int i = 0; i < s.size(); i++) {
             bool flag = 0;  //标记是否出现重复字符
             for (int j = i + 1; j < s.size(); j++) {
@@ -36,19 +37,17 @@ public:
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
-        if (s == "")
+        if (s == "") {
             return 0;
-        set<char > se;
+        }
+        set<char> se;
         int cnt = 1;
-        for (int i = 0, j = 0; i<s.length() && j<s.length();)
-        {
-            if (se.count(s[j])<1)
-            {
+        for (int i = 0, j = 0; i<s.length() && j<s.length();) {
+            if (se.count(s[j])<1) {
                 se.insert(s[j++]);
                 cnt = max(cnt, j - i);
             }
-            else
-            {
+            else {
                 se.erase(s[i++]);
             }
         }
