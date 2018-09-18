@@ -31,3 +31,27 @@ public:
         return max;
     }
 };
+
+// 解法二： 运用<set>
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        if (s == "")
+            return 0;
+        set<char > se;
+        int cnt = 1;
+        for (int i = 0, j = 0; i<s.length() && j<s.length();)
+        {
+            if (se.count(s[j])<1)
+            {
+                se.insert(s[j++]);
+                cnt = max(cnt, j - i);
+            }
+            else
+            {
+                se.erase(s[i++]);
+            }
+        }
+        return cnt;
+    }
+};
