@@ -14,7 +14,7 @@ public:
         ListNode *p = l1, *q = l2;
         int jinwei = 0;
         while (p != NULL || q != NULL) {
-            int result = jinwei + (p ? p->val : 0) + (q ? q->val : 0);  //选择表达式
+            int result = jinwei + (p ? p->val : 0) + (q ? q->val : 0); 
             if (result / 10) {
                 jinwei = 1;
             }
