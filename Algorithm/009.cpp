@@ -2,11 +2,11 @@ class Solution {
 public:
     bool isPalindrome(int x) {
         //小于0肯定不是回文数
-        if (x < 0) {
+        if (x < 0 || (0 == x % 10 && x > 0)) {
             return false;
         }
         //0~9是回文数
-        if (x < 10) {
+        if (0 == x / 10) {
             return true;
         }
         //转化为字符串
