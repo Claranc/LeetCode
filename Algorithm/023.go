@@ -5,6 +5,8 @@
  *     Next *ListNode
  * }
  */
+
+ // soluton 1: 使用哨兵节点
 func mergeKLists(lists []*ListNode) *ListNode {
     PreNode := ListNode{-1, nil}
     sum := 0 //记录合并的总数量
@@ -46,6 +48,46 @@ func mergeKLists(lists []*ListNode) *ListNode {
         //当前最小值的链表向后移一位
         lists[ins] = lists[ins].Next
         count++
+    }
+    return PreNode.Next
+}
+
+// solution 2
+func mergeKLists(lists []*ListNode) *ListNode {
+    PreNode := ListNode{-1, nil}
+    cur := &PreNode
+    k := 0 //保存有多少条链表已经处理完了
+    for i := 0; i < len(lists); i++ {
+        if lists[i] == nil {
+            k++
+        }
+    }
+    if k == len(lists) {
+        return nil
+    }
+    for {
+        min := math.MaxInt64
+        var ins int
+        for i:= 0; i < len(lists); i++ {
+            if lists[i] != nil && lists[i].Val < min {
+                min = lists[i].Val
+                ins = i
+            }
+        }
+        //添加进输出的链表中
+        NewNode := new(ListNode)
+        NewNode.Val = min
+        NewNode.Next = nil
+        cur.Next = NewNode
+        cur = cur.Next
+        //当前最小值的链表向后移一位
+        lists[ins] = lists[ins].Next
+        if lists[ins] == nil {
+            k++
+        }
+        if k == len(lists) {
+            break
+        }
     }
     return PreNode.Next
 }
